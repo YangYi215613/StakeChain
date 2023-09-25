@@ -11,3 +11,12 @@ class Wallet:
         signatureSchemeObject = PKCS1_v1_5.new(self.keyPair)
         signature = signatureSchemeObject.sign(dataHash)
         return signature.hex()
+
+    @staticmethod
+    def signatureValid(data, signature, publicKeyString):
+        signature = bytes.fromhex(signature)
+        dataHash = BlockchainUtils.hash(data)
+        publicKey = RSA.import_key(publicKeyString)
+        signatureSchemeObject = PKCS1_v1_5.new(publicKey)
+        signatureValid = signatureSchemeObject.verify(dataHash, signature)
+        return signatureValid
