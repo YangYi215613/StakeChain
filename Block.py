@@ -16,6 +16,13 @@ class Block:
         self.timestamp = time.time()
         self.signature = ''  # 区块签名
 
+    @staticmethod
+    def genesis():
+        """生成创世区块"""
+        genesisBlock = Block([], 'genesisHash', 'genesis', 0)
+        genesisBlock.timestamp = 0
+        return genesisBlock
+
     def toJson(self):
         data = {}
         data['lastHash'] = self.lastHash
@@ -35,6 +42,7 @@ class Block:
         jsonRepresentation = copy.deepcopy(self.toJson())
         jsonRepresentation['signature'] = ''
         return jsonRepresentation
+
     def sign(self, signature):
 
         """区块签名"""

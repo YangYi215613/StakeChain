@@ -1,6 +1,10 @@
+from Block import Block
+
+
 class Blockchain:
+
     def __init__(self):
-        self.blocks = []
+        self.blocks = [Block.genesis()]
 
     def addBlock(self, block):
         self.blocks.append(block)
