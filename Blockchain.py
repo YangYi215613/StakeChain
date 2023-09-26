@@ -38,6 +38,8 @@ class Blockchain:
 
     def transactionCovered(self, transaction):
         """判断交易数目是否超出"""
+        if transaction.type == 'EXCHANGE': return True
+
         sendBalance = self.accountModel.getBalance(transaction.senderPublicKey)
 
         if sendBalance >= transaction.amount:
