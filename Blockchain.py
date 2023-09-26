@@ -10,6 +10,8 @@ class Blockchain:
         self.accountModel = AccountModel()
 
     def addBlock(self, block):
+        self.executeTransactions(block.transactions)  # 执行区块中的交易
+        
         self.blocks.append(block)
 
     def toJson(self):
@@ -58,3 +60,16 @@ class Blockchain:
                 print('Transaction is not covered by sender')
         
         return coveredTransactions
+
+    def executeTransaction(self, transaction):
+        """执行单笔交易"""
+        sender = transaction.senderPublicKey
+        receiver = transaction.receiverPublicKey
+        amount = transaction.amount
+        self.accountModel.updateBalance(sender, -amount)
+        self.accountModel.updateBalance(receiver, amount)
+
+    def executeTransactions(self, transactions):
+        """执行多笔交易"""
+        for transaction in transactions:
+            self.executeTransaction(transaction)
