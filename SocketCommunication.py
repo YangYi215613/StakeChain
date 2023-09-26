@@ -7,3 +7,9 @@ class SocketCommunication(Node):
     
     def startSocketCommunication(self):
         self.start()
+
+    def inbound_node_connected(self, connected_node):
+        print('inbound connection')
+    
+    def outbound_node_connected(self, connected_node):
+        print('outbound connection')
