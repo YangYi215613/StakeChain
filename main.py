@@ -18,6 +18,6 @@ if __name__ == '__main__':
 
     if pool.transactionExists(transaction) == False:
         pool.addTransaction(transaction)
-    
-    block = Block(pool.transactions, 'lastHash', 'forger', 1)
+
+    block = wallet.createBlock(pool.transactions, 'lastHash', 1)
     print(block.toJson())

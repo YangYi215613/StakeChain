@@ -31,6 +31,11 @@ class Block:
         return data
     
     def payload(self):
+        """区块中本身附带的数据"""
         jsonRepresentation = copy.deepcopy(self.toJson())
         jsonRepresentation['signature'] = ''
         return jsonRepresentation
+    def sign(self, signature):
+
+        """区块签名"""
+        self.signature = signature
