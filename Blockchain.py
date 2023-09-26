@@ -1,11 +1,13 @@
 from Block import Block
 from BlockchainUtils import BlockchainUtils
+from AccountModel import AccountModel
 
 
 class Blockchain:
 
     def __init__(self):
         self.blocks = [Block.genesis()]
+        self.accountModel = AccountModel()
 
     def addBlock(self, block):
         self.blocks.append(block)
@@ -33,3 +35,24 @@ class Blockchain:
             return True
         else:
             return False
+
+    def transactionCovered(self, transaction):
+        """判断交易数目是否超出"""
+        sendBalance = self.accountModel.getBalance(transaction.senderPublicKey)
+
+        if sendBalance >= transaction.amount:
+            return True
+        else:
+            return False
+
+    def getCoveredTransactionSet(self, transactions):
+        """得到transactions中符合的transaciton"""
+        coveredTransactions = []
+
+        for transaction in transactions:
+            if self.transactionCovered(transaction):
+                coveredTransactions.append(transaction)
+            else:
+                print('Transaction is not covered by sender')
+        
+        return coveredTransactions
