@@ -31,13 +31,14 @@ class Wallet:
         return publicKeyString
  
     def createTransaction(self, receiver, amount, type):
-        """创建交易"""
+        """使用钱包创建交易"""
         transaction = Transaction(self.publicKeyString(), receiver, amount, type)
         signature = self.sign(transaction.payload())
         transaction.sign(signature)
         return transaction
     
     def createBlock(self, transactions, lastHash, blockCount):
+        """使用钱包创建区块"""
         block = Block(transactions, lastHash, self.publicKeyString(), blockCount)
         signature = self.sign(block.payload())
         block.sign(signature)

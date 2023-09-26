@@ -34,6 +34,7 @@ class Transaction:
         return jsonRepresentation
 
     def equals(self, transaction):
+        """判断交易是否相等，通过uuid"""
         if self.id == transaction.id:
             return True
         else:

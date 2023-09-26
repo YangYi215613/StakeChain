@@ -44,6 +44,5 @@ class Block:
         return jsonRepresentation
 
     def sign(self, signature):
-
         """区块签名"""
         self.signature = signature
