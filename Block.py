@@ -1,4 +1,5 @@
 import time
+import copy
 
 class Block:
     def __init__(self, transactions, lastHash, forger, blockCount):
@@ -28,4 +29,8 @@ class Block:
         
         data['transactions'] = jsonTransactions
         return data
-        
+    
+    def payload(self):
+        jsonRepresentation = copy.deepcopy(self.toJson())
+        jsonRepresentation['signature'] = ''
+        return jsonRepresentation
