@@ -1,4 +1,4 @@
-class Mesage:
+class Message:
 
     def __init__(self, senderConnector, messageType, data):
         self.senderConnector = senderConnector

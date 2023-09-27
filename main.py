@@ -7,6 +7,8 @@ if __name__ == '__main__':
     port = int(sys.argv[2])
 
     node = Node(ip, port)
-    node.startP2P()  # python main.py localhost 5000
+    node.startP2P()  
 
-    # python main.py localhost 10001
+    # python main.py localhost 10001 
+    # python main.py localhost 10002
+    # python main.py localhost 10003
