@@ -14,3 +14,5 @@ if __name__ == '__main__':
     # 测试
     # python main.py localhost 10001 5001
     # http://localhost:5001/info
+    # http://localhost:5001/blockchain
+    # http://localhost:5001/transactionPool
