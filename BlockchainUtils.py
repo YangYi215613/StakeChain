@@ -7,7 +7,7 @@ class BlockchainUtils():
         """
         返回数据的sha256哈希值
         """
-        dataString = json.dumps(data)
+        dataString = jsonpickle.dumps(data)
         dataBytes = dataString.encode('utf-8')
         dataHash = SHA256.new(dataBytes)
         return dataHash
