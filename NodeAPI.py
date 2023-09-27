@@ -22,14 +22,17 @@ class NodeAPI(FlaskView):
 
     @route('/info', methods=['GET'])
     def info(self):
+        """测试接口"""
         return 'This is a communication interface to a node blockchain', 200
 
     @route('/blockchain', methods=['GET'])
     def blockchain(self):
+        """查看节点中区块链数据"""
         return node.blockchain.toJson(), 200
 
     @route('/transactionPool', methods=['GET'])
     def transactionPool(self):
+        """查看节点中区块池数据"""
         transactions = {}
         for number, transaction in enumerate(node.transactionPool.transactions):
             transactions[number] = transaction.toJson()
@@ -37,6 +40,7 @@ class NodeAPI(FlaskView):
 
     @route('/transaction', methods=['POST'])
     def transaction(self):
+        """发起交易"""
         values = request.get_json()
         if not 'transaction' in values:
             return 'Missing transaction value', 400
