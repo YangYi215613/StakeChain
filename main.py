@@ -11,8 +11,11 @@ if __name__ == '__main__':
     node.startP2P()  # 启动P2P服务
     node.startAPI(apiPort)  # 启动RESTful服务
 
-    # 测试
-    # python main.py localhost 10001 5001
-    # http://localhost:5001/info
-    # http://localhost:5001/blockchain
-    # http://localhost:5001/transactionPool
+    # 测试 三个端口，分别执行下述命令
+    # python main.py localhost 10001 5000
+    # python main.py localhost 10002 5001
+    # python interaction.py
+    # http://localhost:5000/transactionPool  查看交易池状态
+
+    # http://localhost:5000/info
+    # http://localhost:5000/blockchain

@@ -22,3 +22,14 @@ class Node:
         self.api = NodeAPI()
         self.api.injectNode(self)  # 将node注入nodeAPI中
         self.api.start(apiPort)
+
+    def handelTransaction(self, transaction):
+        data = transaction.payload()
+        signature = transaction.signature
+        signerPublicKey = transaction.senderPublicKey
+        # 验证交易是否有效
+        signatureValid = Wallet.signatureValid(data, signature, signerPublicKey)
+        transactionExists = self.transactionPool.transactionExists(transaction)
+        if not transactionExists and signatureValid:
+            # 将交易添加到该节点的交易池中
+            self.transactionPool.addTransaction(transaction)

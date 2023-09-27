@@ -1,5 +1,6 @@
 from flask_classful import FlaskView, route
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
+from BlockchainUtils import BlockchainUtils
 
 node = None
 
@@ -33,3 +34,16 @@ class NodeAPI(FlaskView):
         for number, transaction in enumerate(node.transactionPool.transactions):
             transactions[number] = transaction.toJson()
         return jsonify(transactions), 200
+
+    @route('/transaction', methods=['POST'])
+    def transaction(self):
+        values = request.get_json()
+        if not 'transaction' in values:
+            return 'Missing transaction value', 400
+        # 解码成交易信息
+        transaction = BlockchainUtils.decode(values['transaction'])
+        # 处理交易
+        node.handelTransaction(transaction)
+        response = {'message': 'Received transaction'}
+
+        return jsonify(response), 201
