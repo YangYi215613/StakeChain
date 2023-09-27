@@ -13,12 +13,16 @@ class SocketCommunication(Node):
         self.peerDiscoveryHandler.start()  # 启动节点发现
 
     def inbound_node_connected(self, connected_node):
-        print('inbound connection')
-        self.send_to_node(connected_node, '你好，我是你链接的节点')
+        self.peerDiscoveryHandler.handshake(connected_node)
     
     def outbound_node_connected(self, connected_node):
-        print('outbound connection')
-        self.send_to_node(connected_node, '你好，我是要链接你的节点')
+       self.peerDiscoveryHandler.handshake(connected_node)
 
     def node_message(self, connected_node, message):
         print(message)
+
+    def send(self, receiver, message):
+        self.send_to_node(receiver, message)
+
+    def broadcast(self, message):
+        self.send_to_nodes(message)

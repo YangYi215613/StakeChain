@@ -20,3 +20,6 @@ class PeerDiscoveryHandler:
         statusThread.start()
         discoveryThread = threading.Thread(target=self.dicovery, args=())
         discoveryThread.start()
+
+    def handshake(self, connect_node):
+        self.SocketCommunication.send(connect_node, 'HandShake ...')
