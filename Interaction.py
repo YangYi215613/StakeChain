@@ -12,4 +12,4 @@ if __name__ == '__main__':
     url = 'http://127.0.0.1:5000/transaction'
     package = {'transaction': BlockchainUtils.encode(transaction)}
     request = requests.post(url, json=package)
-    print(request)
+    print(request.text)  # '{'message': 'Received transaction'}'
