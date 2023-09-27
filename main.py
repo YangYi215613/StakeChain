@@ -16,6 +16,7 @@ if __name__ == '__main__':
     # python main.py localhost 10002 5001
     # python interaction.py
     # http://localhost:5000/transactionPool  查看交易池状态
+    # http://localhost:5001/transactionPool  查看交易池状态
 
     # http://localhost:5000/info
     # http://localhost:5000/blockchain
