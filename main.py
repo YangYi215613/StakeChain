@@ -7,9 +7,8 @@ if __name__ == '__main__':
     port = int(sys.argv[2])
 
     node = Node(ip, port)
-    node.startP2P()  
+    node.startP2P()  # 启动P2P服务
+    node.startAPI()  # 启动RESTFUL服务
 
-    # 测试: 三个终端，分别执行
-    # python main.py localhost 10001 
-    # python main.py localhost 10002
-    # python main.py localhost 10003
+    # 测试
+    # http://localhost:5000/info
