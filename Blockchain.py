@@ -91,3 +91,10 @@ class Blockchain:
         lastBlockHash = BlockchainUtils.hash(self.blocks[-1].payload()).hexdigest()
         nextForger = self.pos.forger(lastBlockHash)
         return nextForger
+
+    def createBlock(self, transactionFromPool, forgerWallet):
+        coveredTransactions = self.getCoveredTransactionSet(transactionFromPool)
+        self.executeTransactions(coveredTransactions)
+        newBlock = forgerWallet.createBlock(coveredTransactions, BlockchainUtils.hash(self.blocks[-1].payload()).hexdigest(), len(self.blocks))
+        self.blocks.append(newBlock)
+        return newBlock

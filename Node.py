@@ -51,5 +51,13 @@ class Node:
         if forger == self.wallet.publicKeyString():
             # 生成区块
             print('我是下一个铸造者')
+            # 创建区块
+            block = self.blockchain.createBlock(self.transactionPool.transactions, self.wallet)
+            # 删除交易池中的交易
+            self.transactionPool.removeFromPool(block.transactions)
+            # 创建BLOCK交易
+            message = Message(self.p2p.socketConnector, 'BLOCK', block)
+            encodedMessage = BlockchainUtils.encode(message)
+            self.p2p.broadcast(encodedMessage)
         else:
             print('我不是下一个铸造者')
