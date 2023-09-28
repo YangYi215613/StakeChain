@@ -65,11 +65,21 @@ class Blockchain:
 
     def executeTransaction(self, transaction):
         """执行单笔交易"""
-        sender = transaction.senderPublicKey
-        receiver = transaction.receiverPublicKey
-        amount = transaction.amount
-        self.accountModel.updateBalance(sender, -amount)
-        self.accountModel.updateBalance(receiver, amount)
+        if transaction.type == 'STAKE':
+            sender = transaction.senderPublicKey
+            receiver = transaction.receiverPublicKey
+            if sender == receiver:
+                amount = transaction.amount
+                # 更新抵押数
+                self.pos.update(sender, amount)
+                # 修改账户余额(抵押之后，余额变低)
+                self.accountModel.updateBalance(sender, -amount)
+        else:
+            sender = transaction.senderPublicKey
+            receiver = transaction.receiverPublicKey
+            amount = transaction.amount
+            self.accountModel.updateBalance(sender, -amount)
+            self.accountModel.updateBalance(receiver, amount)
 
     def executeTransactions(self, transactions):
         """执行多笔交易"""
