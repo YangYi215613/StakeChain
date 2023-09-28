@@ -34,7 +34,9 @@ class Node:
         # 验证交易是否有效
         signatureValid = Wallet.signatureValid(data, signature, signerPublicKey)
         transactionExists = self.transactionPool.transactionExists(transaction)
-        if not transactionExists and signatureValid:
+        # 判断交易是否已经在区块链中
+        transactionInBlock = self.blockchain.transactionExists(transaction)
+        if not transactionExists and not transactionInBlock and signatureValid:
             # 将交易添加到该节点的交易池中
             self.transactionPool.addTransaction(transaction)
             # 广播交易

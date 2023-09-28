@@ -98,3 +98,11 @@ class Blockchain:
         newBlock = forgerWallet.createBlock(coveredTransactions, BlockchainUtils.hash(self.blocks[-1].payload()).hexdigest(), len(self.blocks))
         self.blocks.append(newBlock)
         return newBlock
+
+    def transactionExists(self, transaction):
+        """判断交易是否已经在区块链中(如果在区块链中，就不添加该交易)"""
+        for block in self.blocks:
+            for blockTransaction in block.transactions:
+                if transaction.equals(blockTransaction):
+                    return True
+        return False
