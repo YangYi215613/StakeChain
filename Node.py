@@ -47,7 +47,27 @@ class Node:
             forgingRequired = self.transactionPool.forgerRequired()
             if forgingRequired:
                 self.forge()
-    
+
+    def handleBlock(self, block):
+        forger = block.forger
+        blockHash = block.payload()
+        signature = block.signature
+
+        blockCountValid = self.blockchain.blockCountValid(block)  # 验证区块数是否有效
+        lastBlockHashValid = self.blockchain.lastBlockHashValid(block)   # 验证前区块哈希是否有效
+        forgerValid = self.blockchain.forgerValid(block)  # 验证铸造者是否有效
+        transactionValid = self.blockchain.transactionValid(block.transactions)  # 验证区块中交易是否有效
+        signatureValid = Wallet.signatureValid(blockHash, signature, forger)  # 验证区块签名是否有效
+        if lastBlockHashValid and forgerValid and transactionValid and signatureValid and blockCountValid:
+            # 该节点打包交易
+            self.blockchain.addBlock(block)
+            self.transactionPool.removeFromPool(block.transactions)
+            # 广播交易
+            message = Message(self.p2p.socketConnector, 'BLOCK', block)
+            encodedMessage = BlockchainUtils.encode(message)
+            self.p2p.broadcast(encodedMessage)
+
+
     def forge(self):
         forger = self.blockchain.nextForger()
         if forger == self.wallet.publicKeyString():
