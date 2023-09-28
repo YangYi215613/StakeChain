@@ -9,6 +9,12 @@ class ProofOfStake:
         """
         # TODO stakes没有数据，导致没有办法选择铸造者，执行会出错
         self.stakes = {}
+        self.setGenesisNodeStake()
+
+    def setGenesisNodeStake(self):
+        """设置初始权益抵押，否则无法生成铸造者，打包第一个区块，触发后续状态的更改"""
+        genesisPublicKey = open('./keys/genesisPublicKey.pem', 'r').read()
+        self.stakes[genesisPublicKey] = 1
 
     def update(self, publiKeyString, stake):
         if publiKeyString in self.stakes.keys():
