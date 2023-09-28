@@ -29,7 +29,7 @@ class TransactionPool():
         self.transactions = newPoolTransactions
 
     def forgerRequired(self):
-        if len(self.transactions) >= 1:  # TODO 交易阈值
+        if len(self.transactions) >= 3:  # TODO 交易阈值
             return True
         else:
             return False

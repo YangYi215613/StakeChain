@@ -7,7 +7,7 @@ class ProofOfStake:
         key: 公钥
         value: 抵押数
         """
-        # TODO stakes没有数据，导致没有办法选择铸造者，执行会出错
+        # stakesr如果没有数据，导致没有办法选择铸造者，执行会出错
         self.stakes = {}
         self.setGenesisNodeStake()
 
