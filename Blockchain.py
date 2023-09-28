@@ -1,6 +1,7 @@
 from Block import Block
 from BlockchainUtils import BlockchainUtils
 from AccountModel import AccountModel
+from ProofOfStake import ProofOfStake
 
 
 class Blockchain:
@@ -8,6 +9,7 @@ class Blockchain:
     def __init__(self):
         self.blocks = [Block.genesis()]
         self.accountModel = AccountModel()
+        self.pos = ProofOfStake()
 
     def addBlock(self, block):
         self.executeTransactions(block.transactions)  # 执行区块中的交易
@@ -73,3 +75,9 @@ class Blockchain:
         """执行多笔交易"""
         for transaction in transactions:
             self.executeTransaction(transaction)
+
+    def nextForger(self):
+        """生成下一个铸造者"""
+        lastBlockHash = BlockchainUtils.hash(self.blocks[-1].payload()).hexdigest()
+        nextForger = self.pos.forger(lastBlockHash)
+        return nextForger

@@ -39,3 +39,15 @@ class Node:
             message = Message(self.p2p.socketConnector, 'TRANSACTION', transaction)
             encodedMessage = BlockchainUtils.encode(message)
             self.p2p.broadcast(encodedMessage)
+            # 是否达到生成区块条件
+            forgingRequired = self.transactionPool.forgerRequired()
+            if forgingRequired:
+                self.forge()
+    
+    def forge(self):
+        forger = self.blockchain.nextForger()
+        if forger == self.wallet.publicKeyString():
+            # 生成区块
+            print('我是下一个铸造者')
+        else:
+            print('我不是下一个铸造者')
