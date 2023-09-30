@@ -10,14 +10,17 @@ class Transaction:
         receiverPublicKey: 接收者公钥
         amount: 交易数
         type: 交易类型
+        id: uuid
+        timestamp: 时间戳
+        signature: 交易签名
         """
         self.senderPublicKey = senderPublicKey
         self.receiverPublicKey = receiverPublicKey
         self.amount = amount
         self.type = type
-        self.id = uuid.uuid1().hex  # 交易ID
+        self.id = uuid.uuid1().hex 
         self.timestamp = time.time()
-        self.signature = ''  # 签名
+        self.signature = '' 
 
     def toJson(self):
         """交易字典形式"""

@@ -12,6 +12,7 @@ class Blockchain:
         self.pos = ProofOfStake()
 
     def addBlock(self, block):
+        """区块添加到本地区块链副本"""
         self.executeTransactions(block.transactions)  # 执行区块中的交易
         
         self.blocks.append(block)
@@ -93,6 +94,7 @@ class Blockchain:
         return nextForger
 
     def createBlock(self, transactionFromPool, forgerWallet):
+        """创建区块"""
         coveredTransactions = self.getCoveredTransactionSet(transactionFromPool)
         self.executeTransactions(coveredTransactions)
         newBlock = forgerWallet.createBlock(coveredTransactions, BlockchainUtils.hash(self.blocks[-1].payload()).hexdigest(), len(self.blocks))
@@ -108,7 +110,7 @@ class Blockchain:
         return False
 
     def forgerValid(self, block):
-        """验证铸造者是否有效"""
+        """验证领导者是否有效"""
         forgerPublicKey = self.pos.forger(block.lastHash)
         proposeBlockForger = block.forger
         if forgerPublicKey == proposeBlockForger:

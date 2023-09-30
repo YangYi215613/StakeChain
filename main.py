@@ -1,3 +1,6 @@
+"""
+程序启动文件
+"""
 from Node import Node
 import sys
 
@@ -15,10 +18,14 @@ if __name__ == '__main__':
     node.startP2P()  # 启动P2P服务
     node.startAPI(apiPort)  # 启动RESTful服务
 
+    # 测试 四个端口，分别执行下述命令
+    # python main.py localhost 10001 5000 keys/genesisPrivateKey.pem  # genesis抵押
+    # python main.py localhost 10002 5001 keys/stakerPrivateKey.pem  # alice抵押
+    # python main.py localhost 10003 5002  # 无抵押
+    # python interaction.py
 
     # http://localhost:5000/transactionPool  查看交易池状态
     # http://localhost:5001/transactionPool  查看交易池状态
 
     # http://localhost:5000/info
     # http://localhost:5000/blockchain
- 

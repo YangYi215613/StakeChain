@@ -1,3 +1,6 @@
+"""
+交互文件: 通过RESTful向区块链网络中发送交易
+"""
 from Wallet import Wallet
 from BlockchainUtils import BlockchainUtils
 import requests
@@ -29,9 +32,3 @@ if __name__ == '__main__':
 
     # pos之后，铸造者: 可能是 alice
     postTransaction(alice, bob, 1, 'TRANFER')
-
-    # 测试 四个端口，分别执行下述命令
-    # python main.py localhost 10001 5000 keys/genesisPrivateKey.pem  # genesis抵押
-    # python main.py localhost 10002 5001 keys/stakerPrivateKey.pem  # alice抵押
-    # python main.py localhost 10003 5002  # 无抵押
-    # python interaction.py

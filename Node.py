@@ -16,19 +16,23 @@ class Node:
         self.transactionPool = TransactionPool()
         self.wallet = Wallet()
         self.blockchain = Blockchain()
+        # 节点可初始设置KEY值, 不适用自动生成
         if key is not None:
             self.wallet.fromKey(key)
 
     def startP2P(self):
+        """启动socket"""
         self.p2p = SocketCommunication(self.ip, self.port)
         self.p2p.startSocketCommunication(self)  # 方便P2P通讯
 
     def startAPI(self, apiPort):
+        """启动RESTful API"""
         self.api = NodeAPI()
         self.api.injectNode(self)  # 将node注入nodeAPI中
         self.api.start(apiPort)
 
     def handelTransaction(self, transaction):
+        """节点处理交易"""
         data = transaction.payload()
         signature = transaction.signature
         signerPublicKey = transaction.senderPublicKey
@@ -50,6 +54,7 @@ class Node:
                 self.forge()
 
     def handleBlock(self, block):
+        """节点处理区块"""
         forger = block.forger
         blockHash = block.payload()
         signature = block.signature
@@ -80,6 +85,7 @@ class Node:
         self.p2p.broadcast(encodedMessage)
 
     def handleBlockchainRequest(self, requestingNode):
+        """给指定节点requestingNode发送自己本地区块数据"""
         message = Message(self.p2p.socketConnector, 'BLOCKCHAIN', self.blockchain)
         encodedMessage = BlockchainUtils.encode(message)
         self.p2p.send(requestingNode, encodedMessage)
@@ -97,10 +103,11 @@ class Node:
             self.blockchain = localBlockchainCopy
 
     def forge(self):
+        """判断节点该节点是不是领导者"""
         forger = self.blockchain.nextForger()
         if forger == self.wallet.publicKeyString():
             # 生成区块
-            print('我是下一个铸造者')
+            print('我是下一个领导者')
             # 创建区块
             block = self.blockchain.createBlock(self.transactionPool.transactions, self.wallet)
             # 删除交易池中的交易
@@ -110,4 +117,4 @@ class Node:
             encodedMessage = BlockchainUtils.encode(message)
             self.p2p.broadcast(encodedMessage)
         else:
-            print('我不是下一个铸造者')
+            print('我不是下一个领导者')

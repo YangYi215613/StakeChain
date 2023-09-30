@@ -5,7 +5,7 @@ class AccountModel:
 
     def addAccount(self, publicKeyString):
         """通过key添加value值"""
-        if not publicKeyString in self.accounts:
+        if publicKeyString not in self.accounts:
             self.accounts.append(publicKeyString)
             self.balances[publicKeyString] = 0
     

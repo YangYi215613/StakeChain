@@ -14,8 +14,10 @@ class BlockchainUtils():
 
     @staticmethod
     def encode(objectToEncode):
+        """编码数据"""
         return jsonpickle.encode(objectToEncode, unpicklable=True)
 
     @staticmethod
     def decode(encodedObject):
+        """解码数据"""
         return jsonpickle.decode(encodedObject)

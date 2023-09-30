@@ -1,3 +1,6 @@
+"""
+测试PoS文件
+"""
 from ProofOfStake import ProofOfStake
 from Lot import Lot
 import string

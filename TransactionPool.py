@@ -29,6 +29,7 @@ class TransactionPool():
         self.transactions = newPoolTransactions
 
     def forgerRequired(self):
+        """生成区块要求: 根据交易阈值"""
         if len(self.transactions) >= 3:  # TODO 交易阈值
             return True
         else:

@@ -6,15 +6,16 @@ class Block:
         """
         transactions: 区块中交易
         lastHash: 前区块哈希
-        forger: 区块铸造者
-        blockCount: 第几个快
+        forger: 区块领导者
+        blockCount: 区块编号
+        signature: 区块签名
         """
         self.transactions = transactions
         self.lastHash = lastHash
         self.forger = forger
         self.blockCount = blockCount
         self.timestamp = time.time()
-        self.signature = ''  # 区块签名
+        self.signature = ''
 
     @staticmethod
     def genesis():

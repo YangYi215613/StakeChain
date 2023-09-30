@@ -28,7 +28,7 @@ class ProofOfStake:
         else:
             return None
 
-    def validatorLots(self, seed):
+    def _validatorLots(self, seed):
         lots = []
         for validator in self.stakes.keys():
             for stake in range(self.get(validator)):
@@ -36,7 +36,7 @@ class ProofOfStake:
         
         return lots
 
-    def winnerLot(self, lots, seed):
+    def _winnerLot(self, lots, seed):
         winnerLot = None
         leastOffSet = None
         referenceHashIntValue = int(BlockchainUtils.hash(seed).hexdigest(), 16)
@@ -50,6 +50,7 @@ class ProofOfStake:
         return winnerLot
     
     def forger(self, lastBlockHash):
-        lots = self.validatorLots(lastBlockHash)
-        winnerLot = self.winnerLot(lots, lastBlockHash)
+        """返回PoS领导者的公钥"""
+        lots = self._validatorLots(lastBlockHash)
+        winnerLot = self._winnerLot(lots, lastBlockHash)
         return winnerLot.publicKey
