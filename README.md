@@ -2,9 +2,7 @@
 
 基于PoS共识机制构建的区块链系统，提供节点之间P2P通讯，支持RESTful API接口调用。
 
-## 1 使用方式
-
-### 1.1 环境安装
+### 1 环境安装
 
 ```python
 conda create -n pos python=3.8
@@ -13,7 +11,7 @@ conda activate pos
 pip install -r requirements.txt
 ```
 
-### 1.2 执行方式
+### 2 执行方式
 
 ```python
 python main.py localhost 10001 5000 keys/genesisPrivateKey.pem  # genesis抵押
@@ -25,7 +23,7 @@ python interaction.py  # 或者使用Postman
 
 ![](/assets/image.png)
 
-### 1.3 执行效果
+### 3 执行效果
 
 #### 查看节点中区块链数据
 
@@ -118,3 +116,11 @@ python interaction.py  # 或者使用Postman
 ```python
 python interaction.py  # 或postman调用RESTful接口
 ```
+
+### 4 性能测试
+
+使用JMeter对系统进行压力测试
+
+![Alt text](/assets/image2.png)
+
+![Alt text](/assets/image1.png)
