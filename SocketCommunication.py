@@ -9,7 +9,7 @@ class SocketCommunication(Node):
     def __init__(self, ip, port):
         super(SocketCommunication, self).__init__(ip, port, None)
         self.peers = []  # 链接的节点
-        self.peerDiscoveryHandler = PeerDiscoveryHandler(self)  # 
+        self.peerDiscoveryHandler = PeerDiscoveryHandler(self)
         self.socketConnector = SocketConnector(ip, port)
     
     def connectFirstNode(self):

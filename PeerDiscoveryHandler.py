@@ -44,29 +44,29 @@ class PeerDiscoveryHandler:
         encodeMessage = BlockchainUtils.encode(message)
         return encodeMessage
 
-def handleMessage(self, message):
-    """处理来自其他节点的握手消息"""
-    peersSocketConnector = message.senderConnector
-    peersPeerList = message.data
-    newPeer = True
-    
-    # 检查是否为新节点
-    for peer in self.socketCommunication.peers:
-        if peer.equals(peersSocketConnector):
-            newPeer = False
-    
-    if newPeer:
-        # 将发送方的连接器对象添加到节点的连接器列表中
-        self.socketCommunication.peers.append(peersSocketConnector)
-    
-    for peersPeer in peersPeerList:
-        peerKnown = False
+    def handleMessage(self, message):
+        """处理来自其他节点的握手消息"""
+        peersSocketConnector = message.senderConnector
+        peersPeerList = message.data
+        newPeer = True
         
-        # 检查是否已知节点
+        # 检查是否为新节点
         for peer in self.socketCommunication.peers:
-            if peer.equals(peersPeer):
-                peerKnown = True
+            if peer.equals(peersSocketConnector):
+                newPeer = False
         
-        # 如果节点未知且不是自身节点，则与其建立连接
-        if not peerKnown and not peersPeer.equals(self.socketCommunication.socketConnector):
-            self.socketCommunication.connect_with_node(peersPeer.ip, peersPeer.port)
+        if newPeer:
+            # 将发送方的连接器对象添加到节点的连接器列表中
+            self.socketCommunication.peers.append(peersSocketConnector)
+        
+        for peersPeer in peersPeerList:
+            peerKnown = False
+            
+            # 检查是否已知节点
+            for peer in self.socketCommunication.peers:
+                if peer.equals(peersPeer):
+                    peerKnown = True
+            
+            # 如果节点未知且不是自身节点，则与其建立连接
+            if not peerKnown and not peersPeer.equals(self.socketCommunication.socketConnector):
+                self.socketCommunication.connect_with_node(peersPeer.ip, peersPeer.port)

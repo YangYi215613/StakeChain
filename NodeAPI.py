@@ -32,7 +32,7 @@ class NodeAPI(FlaskView):
 
     @route('/transactionPool', methods=['GET'])
     def transactionPool(self):
-        """查看节点中区块池数据"""
+        """查看节点中交易池数据"""
         transactions = {}
         for number, transaction in enumerate(node.transactionPool.transactions):
             transactions[number] = transaction.toJson()
