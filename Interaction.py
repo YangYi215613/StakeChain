@@ -4,6 +4,7 @@
 from Wallet import Wallet
 from BlockchainUtils import BlockchainUtils
 import requests
+import json
 
 
 def postTransaction(sender, receiver, amount, type):
@@ -16,6 +17,8 @@ def postTransaction(sender, receiver, amount, type):
     transaction = sender.createTransaction(receiver.publicKeyString(), amount, type)
     url = url = 'http://localhost:5000/transaction'
     package = {'transaction': BlockchainUtils.encode(transaction)}
+    with open('transactionJson.json', 'w') as file:
+        json.dump(package, file)
     request = requests.post(url, json=package)
     print(request.text)  # '{'message': 'Received transaction'}'
 
