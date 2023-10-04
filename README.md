@@ -1,6 +1,6 @@
 # StakeChain
 
-基于PoS共识机制构建的区块链系统，提供节点之间P2P通讯，支持RESTful API接口调用。
+基于PoS共识机制构建的区块链系统，提供节点之间P2P通讯，支持RESTful API接口调用。用于实验测试。
 
 ### 1 环境安装
 
@@ -124,3 +124,13 @@ python interaction.py  # 或postman调用RESTful接口
 ![Alt text](/assets/image2.png)
 
 ![Alt text](/assets/image1.png)
+
+测试数据
+
+| node number | PoS TX 1000 | PoS TX 1500 |
+| ----------- | ----------- | ----------- |
+| 20          | 315 tps/s   | 429 tps/s   |
+| 40          | 235 tps/s   | 298 tps/s   |
+| 60          | 167 tps/s   | 214 tps/s   |
+| 80          | 105 tps/s   | 149 tps/s   |
+| 100         | 49 tps/s    | 86 tps/s    |
