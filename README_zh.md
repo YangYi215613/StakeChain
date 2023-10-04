@@ -1,8 +1,8 @@
 # StakeChain
 
-Blockchain system built based on PoS consensus mechanism provides P2P communication between nodes and supports RESTful API calls. They were used for experimental testing.
+基于PoS共识机制构建的区块链系统，提供节点之间P2P通讯，支持RESTful API接口调用。用于实验测试。
 
-### 1 Installation
+### 1 环境安装
 
 ```python
 conda create -n pos python=3.8
@@ -11,7 +11,7 @@ conda activate pos
 pip install -r requirements.txt
 ```
 
-### 2 Implementation
+### 2 执行方式
 
 ```python
 python main.py localhost 10001 5000 keys/genesisPrivateKey.pem  # genesis抵押
@@ -23,15 +23,15 @@ python interaction.py  # 或者使用Postman
 
 ![](/assets/image.png)
 
-### 3 Implementation effect
+### 3 执行效果
 
-#### View the node's blockchain data
+#### 查看节点中区块链数据
 
-node 10001: http://localhost:5000/blockchain
+节点10001: http://localhost:5000/blockchain
 
-node 10002: http://localhost:5001/blockchain
+节点10002: http://localhost:5001/blockchain
 
-node 10003: http://localhost:5002/blockchain
+节点10003: http://localhost:5002/blockchain
 
 
 ```json
@@ -78,13 +78,13 @@ node 10003: http://localhost:5002/blockchain
 }
 ```
 
-#### View the node's transaction pool
+#### 查看节点内交易池数据
 
-node 10001: http://localhost:5000/transactionPool
+节点10001: http://localhost:5000/transactionPool
 
-node 10002: http://localhost:5001/transactionPool
+节点10002: http://localhost:5001/transactionPool
 
-node 10003: http://localhost:5002/transactionPool
+节点10003: http://localhost:5002/transactionPool
 
 
 ```json
@@ -110,22 +110,22 @@ node 10003: http://localhost:5002/transactionPool
 }
 ```
 
-#### initiate transaction
+#### 发起交易
 
 
 ```python
 python interaction.py  # 或postman调用RESTful接口
 ```
 
-### 4 performance
+### 4 性能测试
 
-performance testing using JMeter
+使用JMeter对系统进行压力测试
 
 ![Alt text](/assets/image2.png)
 
 ![Alt text](/assets/image1.png)
 
-performance testing data
+测试数据
 
 | node number | PoS TX 1000 | PoS TX 1500 |
 | ----------- | ----------- | ----------- |
